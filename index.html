@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BetaRaut</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
+    <link href="css/vis.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#intro-section">BetaRaut</span></a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="back-link page-link no-display" href="#"><i class="glyphicon glyphicon-chevron-left"></i> Go Back</a>
+                    </li>
+                    <li>
+                        <a class="result-link page-link no-display" href="#">View Previous Result</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <section id="input-section" class="page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8 hidden-lg hidden-md">
+                    <a class="result-link page-sm-link no-display" href="#">View Previous Result</a>
+                </div>
+                <div class="col-lg-offset-3 col-lg-6 col-sm-offset-1 col-lg-9">
+                    <h2 class="section-header">Enter your details here</h2>
+                    <form class="input-form" action="#" method="POST" role="form">
+                        <div class="form-input-group ui-widget">
+                            <input type="text" id="auto-input" placeholder="Enter your location">
+                        </div>
+                        <div class="form-input-group">
+                            <input type="text" class="" placeholder="Enter your destination">
+                        </div>
+                        <!-- <button type="submit" class="btn btn-primary">Let the best route win!</button> -->
+                        <button class="btn btn-primary" type="submit"><img src="images/yfeet.svg" /></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="result-section" class="page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8 hidden-lg hidden-md">
+                    <a class="back-link page-sm-link no-display" href="#">Go Back</a>
+                </div>
+                <div class="col-lg-12">
+                    <h2 class="">Your best route</h2>
+                    <div id="route"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/vis.js"></script>
+    <script src="js/algo.js"></script>
+    <script type="text/javascript">
+        payload = {
+          "ojuelegba":{
+            "links":['ikorodu road', 'masha', 'Tejuosho Rd', 'yaba'],
+            'town':'surulere',
+            'ikorodu':{distance:12, duration:13}, 
+            'masha':{distance:14, duration:10},
+            'yaba':{distance:22, duration:43}
+          },
+          "yaba":{
+            "links":['ojuelegba', 'Murtala Muhammed Way', 'Herber Macaulay', 'oyigbo road', 'yabatech'],
+            'town':'surulere',
+            'ikorodu':{distance:25, duration:23}, 
+            'masha':{distance:32, duration:3}
+          },
+          "oyigbo road":{
+            "links":['ozone', 'yaba'],
+            "town": 'surulere',
+            'ikorodu road':{distance:12, duration:23}, 
+            'masha':{distance:12, duration:23},
+            'yaba':{distance:10, duration:13}
+          },
+          "ozone":{
+            "links":['sabo', 'oyigbo road', 'ilaje'],
+            "town": 'surulere',
+            'sabo':{distance:42, duration:33}, 
+            'oyigbo road':{distance:12, duration:16},
+            'ilaje':{distance:15, duration:27}
+          },
+          "herbert":{
+            "links":['sabo', 'ozone'],
+            "town": 'ikorodu',
+            'sabo':{distance:18, duration:26}, 
+            'ozone':{distance:10, duration:43}
+          },
+          "sabo":{
+            "links":['alara', 'herbert', 'queens'],
+            "town": 'ikorodu',
+            'alara':{distance:22, duration:19}, 
+            'herbert':{distance:10, duration:23}
+          },
+          "queens":{
+            "links":['alara', 'sabo', 'onike'],
+            "town": 'ikorodu',
+            'alara':{distance:22, duration:19}, 
+            'herbert':{distance:10, duration:23}
+          },
+          "alara":{
+            "links":['funsho', 'sabo', 'onike'],
+            "town": 'ikorodu',
+            'funsho':{distance:42, duration:23}, 
+            'sabo':{distance:34, duration:43},
+            'onike':{distance:7, duration:8}
+          },
+          "funsho":{
+            "links":['alara', 'iyanga'],
+            "town": 'ikorodu',
+            'alara':{distance:5, duration:3}, 
+            'iyanga':{distance:32, duration:18}
+          },
+        };
+        router.init(payload, 'funsho', 'ojuelegba');
+        var availableRoute = router.getRoutes();
+        console.log(availableRoute);
+        var digestRoute = router.digestRoutes(true);
+        //console.log(digestRoute);
+
+    </script>
+    <script src="js/data.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scroll.js"></script>
+</body>
+
+</html>
