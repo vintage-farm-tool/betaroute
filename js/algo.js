@@ -42,7 +42,7 @@ var router = {
         this.buildRoute(links, street);
       }
     }
-    console.log(this.routes);
+    console.log(this.availableRoutes);
     return this.routes;
   },
   buildRoute: function(links, parent_street){
@@ -117,7 +117,12 @@ var router = {
       if(from_pos === -1){
         continue;
       }
-      var obj = {id:from_pos, label: street};
+      var color = '#97c2fc';
+      if(street == this.start)
+        color = '#4ed027'
+      if(street == this.destination)
+        color = '#f77348'
+      var obj = {id:from_pos, label: street, color: color };
       var links = this.routes[street];
       this.dataSet.push(obj);
       links.forEach(function(item, index){
