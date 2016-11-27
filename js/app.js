@@ -27,7 +27,6 @@ var app = {
     router.execute(singlePart).then(function(result){
       app.plotRoute(result.dataSet, result.edgeSet);
     });
-    
   },
   plotRoute: function(dataSet, edgeSet){
     this.showResult($('#result-section'), $('.back-link'), $('.result-link'));

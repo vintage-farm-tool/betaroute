@@ -113,3 +113,10 @@ a.no-display[href="#"] {
   background: rgba( 255, 255, 255, 0.9 ) url('../images/loader.gif') 50% 50% no-repeat;
 }
 
+.color-red {
+    color: #f77348;
+}
+
+.color-green {
+    color: #4ed027;
+}
