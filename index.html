@@ -147,11 +147,10 @@
             'iyanga':{distance:32, duration:18}
           },
         };
-        router.init(payload, 'funsho', 'ojuelegba');
-        var availableRoute = router.getRoutes();
-        console.log(availableRoute);
-        var digestRoute = router.digestRoutes(true);
-        //console.log(digestRoute);
+        router.init(payload, 'ojuelegba', 'funsho');
+        router.execute(true);
+        //var availableRoute = router.getRoutes();
+        //var street_routes = router.digestRoutes(true);
 
     </script>
     <script src="js/data.js"></script>
