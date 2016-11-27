@@ -18,11 +18,14 @@ var router = {
   execute: function(singlePart){
     if(this.start == this.destination)
       return false;
-
-    this.getRoutes();
-    this.digestRoutes();
-    this.generateDataSet(singlePart);
-
+    that = this;
+    return new Promise(function(resolve, reject){
+      that.getRoutes();
+      that.digestRoutes();
+      that.generateDataSet(singlePart);
+      resolve({dataSet: that.dataSet, edgeSet: that.edgeSet});
+    });
+    
   },
   getRoutes: function(){
     this.visited = {};
@@ -34,8 +37,8 @@ var router = {
     while(this.streets.length !== 0){
       street = this.streets[0];
       this.streets.shift();
-      if(payload[street] !== undefined){
-        var links = payload[street]['links'];
+      if(this.payload[street] !== undefined){
+        var links = this.payload[street]['links'];
         this.buildRoute(links, street);
       }
     }

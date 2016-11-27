@@ -5,11 +5,19 @@
 
     $('.input-form').on('submit', function (event) {
         event.preventDefault();
-        // $.post( $(this).prop('action'), $(this).serialize(), function( data ) {
-            // if(!data) {
-                showResult($('#result-section'), $('.back-link'), $('.result-link'));
-            // }
-        // });
+        var location = $('#location').val();
+        var destination = $('#destination').val();
+        if(!location || !destination){
+            alert('Location and Destination are required');
+            return false;
+        }
+        if(location == destination){
+            alert('Location and destination cannot be the same');
+            return false;
+        }
+        //console.log(location, destination, payload);
+        app.route(payload_test, 'funsho', 'ojuelegba', true);
+        //showResult($('#result-section'), $('.back-link'), $('.result-link'));
     });
 
     $(document).on('click', 'a.result-link', function (event) {
