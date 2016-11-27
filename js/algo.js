@@ -42,6 +42,7 @@ var router = {
         this.buildRoute(links, street);
       }
     }
+    console.log(this.routes);
     return this.routes;
   },
   buildRoute: function(links, parent_street){

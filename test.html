@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BetaRaut</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
+    <link href="css/vis.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <script src="js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script type="text/javascript">
+        var config = {
+          apiKey: "AIzaSyDpibXnEgx1Zm6a8wCbueypdlKYOuemLzg",
+          authDomain: "andela-hackathon.firebaseapp.com",
+          databaseURL: "https://andela-hackathon.firebaseio.com",
+          storageBucket: "andela-hackathon.appspot.com",
+          messagingSenderId: "771993023415"
+        };
+        var cleaned = {};
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        var starCountRef = database.ref('streets');
+
+        starCountRef.on('value', function(snapshot) {
+          var data = snapshot.val();
+          for(var street in data){
+            var links = data[street].links;
+            street = street.toLowerCase();
+            street = street.replace('rd st', 'rd');
+            street = street.replace('st st', 'st');
+            street = street.replace('street st', 'st');
+            street = street.trim();
+            if(links){
+              if(links[0] != 'test'){
+                  if(cleaned[street] === undefined){
+                    var cleaned_links = links.map(function(street){
+                        street = street.toLowerCase();
+                        street = street.replace('rd st', 'rd');
+                        street = street.replace('st st', 'st');
+                        street = street.replace('street st', 'st');
+                        return street.trim();
+                    });
+                    cleaned[street] = {'links': cleaned_links};
+                  }
+              }
+            }
+          }
+          database.ref('mainstreets').set(cleaned);
+      });
+    </script>
+</body>
+
+</html>

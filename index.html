@@ -24,6 +24,7 @@
 </head>
 
 <body>
+<div class="loader"></div>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -53,12 +54,15 @@
                 </div>
                 <div class="col-lg-offset-3 col-lg-6 col-sm-offset-1 col-lg-9">
                     <h2 class="section-header">Enter your details here</h2>
+                    <div class="alert alert-danger fade out" id="error">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    </div>
                     <form class="input-form" method="POST" role="form">
                         <div class="form-input-group ui-widget">
-                            <input type="text" id="location" class="street_data" placeholder="Enter your location">
+                            <input type="text" id="location" class="street_data" placeholder="Enter your location" disabled="disabled">
                         </div>
                         <div class="form-input-group">
-                            <input type="text" class="street_data" id="destination" placeholder="Enter your destination">
+                            <input type="text" class="street_data" id="destination" placeholder="Enter your destination" disabled="disabled">
                         </div>
                         <!-- <button type="submit" class="btn btn-primary">Let the best route win!</button> -->
                         <button class="btn btn-primary" type="submit"><img src="images/yfeet.svg" /></button>
@@ -90,7 +94,7 @@
     <script src="js/app.js"></script>
     <script src="js/data.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/scroll.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

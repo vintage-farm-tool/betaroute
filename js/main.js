@@ -16,7 +16,7 @@
             return false;
         }
         //console.log(location, destination, payload);
-        app.route(payload_test, 'funsho', 'ojuelegba', true);
+        app.route(payload, location, destination, true);
         //showResult($('#result-section'), $('.back-link'), $('.result-link'));
     });
 

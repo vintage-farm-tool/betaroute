@@ -46,3 +46,43 @@
 #input-section .input-form .form-input-group input:-ms-input-placeholder {
     color: #BCC1C3;
 }
+
+.form-input-group {
+    position: relative;
+    margin: 0 20px;
+    background: #ddd;
+    width: 200px;
+}
+
+.form-input {
+    height: 20px;
+    margin: 0;
+    padding-right: 30px;
+    width: 100%;
+}
+
+.input-img {
+    position: absolute;
+    bottom: calc(50% - 15px);
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.alert {
+    width: 80%;
+    height: 45px;
+    margin: 0 auto;
+    border-radius: 3px;
+    text-align: left;
+}
+
+.alert .close {
+    line-height: 0.6;
+}
+
+.alert.alert-danger {
+    color: #fff;
+    background-color: #e88e8c;
+    border-color: #e88e8c;
+}

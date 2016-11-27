@@ -1,4 +1,6 @@
 $( function() {
+  $('input').after('<img src="images/input-loader.svg" class="input-img field-loader">');
+
   $( ".street_data" ).autocomplete({
     source: availableTags
   });

@@ -1,7 +1,8 @@
 
 var app = {
+  data: null,
   loadData: function(database){
-    var starCountRef = database.ref('streets');
+    var starCountRef = database.ref('mainstreets');
     starCountRef.on('value', function(snapshot) {
       var data = snapshot.val();
       for(var street in data){
@@ -16,6 +17,8 @@ var app = {
           }
         }
       }
+      $('.field-loader').fadeOut('slow');
+      $('.street_data').attr('disabled', false);
     });
   },
   route: function(payload, start, destination, singlePart){
@@ -28,14 +31,24 @@ var app = {
   },
   plotRoute: function(dataSet, edgeSet){
     this.showResult($('#result-section'), $('.back-link'), $('.result-link'));
-    var nodes = new vis.DataSet(dataSet);
-    var edges = new vis.DataSet(edgeSet);
-    var container = document.getElementById('route');
-    var data = {
-      nodes: nodes,
-      edges: edges
-    };
-    var network = new vis.Network(container, data, {});
+    if(this.data === null){
+      var nodes = new vis.DataSet(dataSet);
+      var edges = new vis.DataSet(edgeSet);
+      var container = document.getElementById('route');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      this.data = data;
+      var network = new vis.Network(container, data, {});
+    }else{
+      this.data.nodes.clear();
+      this.data.edges.clear();
+      this.data.nodes.update(dataSet);
+      this.data.edges.update(edgeSet);
+    }
+    
+    
     
   },
   showResult: function (section, hidden_link, shown_link) {
